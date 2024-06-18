@@ -1,0 +1,131 @@
+.user-details {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+}
+
+.details-nav {
+    min-height: 265px;
+    width: calc(100% - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    background-color: #512689;
+    padding: 16px 35px;
+}
+
+.details-nav-btn {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-btn {
+    cursor: pointer;
+    padding: 8px 16px;
+    border: 1px solid #F8F8F8;
+    border-radius: 8px;
+    background-color: inherit;
+    color: #F8F8F8;
+    font-size: 16px;
+    font-weight: 400px;
+}
+
+.details-user {
+    display: flex;
+    width: 846px;
+    max-width: calc(100% - 80px);
+    justify-content: center;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+}
+
+.user-name {
+    font-family: Roboto;
+    font-size: 64px;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 75px;
+    text-align: center;
+}
+
+.description-container {
+    width: calc(100% - 70px);
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: start;
+    gap: 129px;
+}
+
+.user-description {
+    max-width: 630px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+    color: #151317;
+    line-height: 21.79px;
+}
+.user-email {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    line-height: 21.79px;
+}
+
+@media (max-width: 600px) {
+    .user-details{
+        gap: 32px;
+    }
+    .details-nav {
+        width: calc(100% - 54px);
+        gap: 12px;
+        padding: 16px 27px 54px 27px;
+    }
+    .nav-btn {
+        border: none;
+        padding: 8px;
+    }
+
+    .user-name {
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 42.19px;
+    }
+        .details-user {
+            display: flex;
+            width: 846px;
+            max-width: 100%;
+            justify-content: center;
+        }
+
+    .user-info {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 16px;
+        width: 100%;
+    }
+        .description-container {
+            width: calc(100% - 32px);
+            display: flex;
+            justify-content: center;
+            flex-direction: column-reverse;
+            align-items: start;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+}

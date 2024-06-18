@@ -1,0 +1,29 @@
+.logout-btn {
+    cursor: pointer;
+    padding: 8px 16px;
+    border: 1px solid #F8F8F8;
+    border-radius: 8px;
+    background-color: inherit;
+    color: #F8F8F8;
+    font-size: 16px;
+    font-weight: 400;
+}
+ .btn-not-text {
+     display: block;
+ }
+ .btn-icon {
+    display: none;
+ }
+@media (max-width: 600px) {
+    .logout-btn {
+        border: none;
+        padding: 8px;
+    }
+    .btn-not-text {
+        display: none;
+    }
+    .btn-icon {
+        display: flex;
+        font-size: 22px;
+    }
+}
