@@ -1,6 +1,6 @@
 .login_window {
-    width: 100%;
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -23,14 +23,11 @@
     align-items: center;
 }
 
-/* .login_password input {
-    flex: 1;
-} */
 .password_btn {
     display: flex;
     align-items: center;
     position: absolute;
-    right: 10px;
+    right: 8px;
     border: none;
     background: none;
     cursor: pointer;
@@ -40,12 +37,12 @@
 
 
 .login_password input::placeholder {
-    transform: translateY(.45rem);
+    transform: translateY(8px);
     font-size: 20px;
 }
 
 .login_password input {
-    padding: 12px 34px 12px 8px;
+    padding: 12px 40px 12px 12px;
 }
 
 .login_form {
@@ -57,9 +54,9 @@
 }
 
 label {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    font-weight: 500;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
     text-align: left;
     display: flex;
     justify-content: left;
@@ -67,11 +64,14 @@ label {
 }
 
 input {
-    width: calc(100% - 18px);
+    width: calc(100% - 26px);
+    height: 22px;
     border: 1px solid #e8e9ee;
     border-radius: 8px;
     outline: none;
-    padding: 12px 8px;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 16.41px;
     background-color: #F8F8F8;
 }
 
@@ -98,7 +98,9 @@ input:focus {
     background-color: #512689;
     color: #FFFFFF;
     font-size: 16px;
-    font-weight: 400px;
+    font-weight: 400;
+    line-height: 21.79px;
+    font-family: Roboto;
 }
 
 .error {
@@ -110,5 +112,4 @@ input:focus {
     font-size: 10px;
     margin-top: -10px;
     text-align: left;
-    /* line-height: 11.72px; */
 }

@@ -24,11 +24,17 @@ const Register: React.FC = () => {
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
+        setEmailError('');
     };
 
     const viewPassword = () => {
         setShowPassword(!showPassword);
     };
+
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setConfirmPassword(e.target.value);
+        setPasswordError('');
+    }
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -96,7 +102,8 @@ const Register: React.FC = () => {
                         <input
                             type={showPassword ? "text" : "password"}
                             value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            // onChange={(e) => setConfirmPassword(e.target.value)}
+                            onChange={handlePasswordChange}
                             required
                             placeholder='*******'
                             className={passwordError ? 'error' : ''}

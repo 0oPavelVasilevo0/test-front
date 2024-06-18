@@ -26,9 +26,9 @@ const UserDetail: React.FC = () => {
             dispatch(setCurrentUser(user));
         }
         if (!token) {
-                navigate('/login');
-          }
-    }, [dispatch, token, navigate]);
+            navigate('/login');
+        }
+    }, [token, user, dispatch, navigate]);
 
     if (!user) {
         return <div>User not found</div>;

@@ -7,7 +7,7 @@ import './user-list.css';
 
 const UserList: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
-    const { users, loading, error, page, totalPages } = useSelector((state: RootState) => state.users);
+    const { users, loading, error, totalPages } = useSelector((state: RootState) => state.users);
     const token = useSelector((state: RootState) => state.auth.token);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -37,9 +37,7 @@ const UserList: React.FC = () => {
                     <UserCard key={user.id} user={user} />
                 ))}
             </div>
-
-            {
-                currentPage < totalPages ? (
+            { currentPage < totalPages ? (
                     <button
                         className='list-btn'
                         onClick={handleLoadMore}
