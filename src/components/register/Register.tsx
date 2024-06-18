@@ -1,4 +1,3 @@
-// components/Register.tsx
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +8,10 @@ import { HiOutlineEye, HiOutlineEyeSlash } from 'react-icons/hi2';
 const Register: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
     const { loading, error, token } = useSelector((state: RootState) => state.auth);
@@ -22,13 +23,6 @@ const Register: React.FC = () => {
     };
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // const value = e.target.value;
-        // setEmail(value);
-        // if (!validateEmail(value)) {
-        //     setEmailError('Неверный формат email');
-        // } else {
-        //     setEmailError('');
-        // }
         setEmail(e.target.value);
     };
 
@@ -42,13 +36,18 @@ const Register: React.FC = () => {
             setEmailError('Неправильный формат email');
             return;
         }
+        if (password !== confirmPassword) {
+            setPasswordError('Пароли не совпадают');
+            return;
+        }
         setEmailError('');
+        setPasswordError('');
         dispatch(register({ email, password }));
     };
 
     useEffect(() => {
         if (token) {
-            navigate('/'); // Перенаправление на главную страницу после успешной регистрации
+            navigate('/');
         }
     }, [token, navigate]);
 
@@ -58,11 +57,8 @@ const Register: React.FC = () => {
                 <div className='login_input'>
                     <label>Имя</label>
                     <input
-                        // type="password"
-                        // value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
+                        type="text"
                         required
-                        disabled
                         placeholder='Имя'
                     />
                 </div>
@@ -94,16 +90,22 @@ const Register: React.FC = () => {
                         </button>
                     </div>
                 </div>
-                <div className='login_input'>
+                <div className='login_password'>
                     <label>Подтвердить пароль</label>
-
-                    <input
-                        type="password"
-                        // value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
-                        required
-                        disabled
-                    />
+                    <div className='password_container'>
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            placeholder='*******'
+                            className={passwordError ? 'error' : ''}
+                        />
+                        <button type="button" className='password_btn' onClick={viewPassword}>
+                            {showPassword ? <HiOutlineEye /> : <HiOutlineEyeSlash />}
+                        </button>
+                    </div>
+                    {passwordError && <div className='error_message'>{passwordError}</div>}
                 </div>
                 <button className='btn' type="submit" disabled={loading}>
                     {loading ? 'Регистрация...' : 'Зарегистрироваться'}
