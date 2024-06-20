@@ -16,7 +16,7 @@ function App() {
     <div>
       <Router>
         <ScrollToTop />
-        <Navbar />
+        {token && (<Navbar />)}
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
