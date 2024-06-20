@@ -1,3 +1,4 @@
+@import './App.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 * {
@@ -20,7 +21,7 @@ input {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
-  background-color: #F8F8F8;
+  background-color: var(--gray-light);
 }
 
 input::-ms-clear {

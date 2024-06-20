@@ -122,7 +122,9 @@ const UserDetail = () => {
                 </div>
                 <div className='user-email'>
                     <AiOutlineMail style={{ fontSize: '24px', color: '#512689' }} />
+                    <a href='janet.weaver@reqres.in'>
                     <p>{user.email}</p>
+                    </a>
                 </div>
             </div>
         </div>

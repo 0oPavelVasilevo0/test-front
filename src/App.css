@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+:root {
+  --black: #151317;
+  --violet: #512689;
+  --gray: #808185;
+  --gray-light: #F8F8F8;
+  --error: #FF6161;
+  --white: #FFFFFF;
+  --shadow: 0px 4px 20px 0px #00000014;
+}
+
 /* login page */
 
 .login-container {
@@ -14,7 +24,7 @@
   width: 468px;
   max-width: calc(100% - 32px);
   padding: 16px;
-  box-shadow: 0px 4px 20px 0px #00000014;
+  box-shadow: var(--shadow);
   border-radius: 16px;
 }
 
@@ -22,7 +32,7 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 23.44px;
-  color: #151317;
+  color: var(--black);
   text-align: left;
 }
 
@@ -33,7 +43,7 @@
   flex-direction: row;
   padding: 10px;
   font-size: 12px;
-  color: #c8c8c8;
+  color: var(--gray);
 }
 
 /* home page */
@@ -51,7 +61,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  background-color: #512689;
+  background-color: var(--violet);
   padding: 16px 35px;
 }
 
@@ -73,7 +83,7 @@
 }
 
 .title {
-  color: #FFFFFF;
+  color: var(--white);
   font-family: Roboto;
   font-size: 64px;
   font-weight: 400;
@@ -82,8 +92,8 @@
 }
 
 .title-description {
-  color: #F8F8F8;
-  font-family: Roboto;
+  color: var(--gray-light);
+  font-family: 'Roboto';
   font-size: 20px;
   font-weight: 400;
   line-height: 23.44px;

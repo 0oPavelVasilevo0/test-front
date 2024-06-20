@@ -4,8 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: rgb(47, 43, 43);
-    background-color: #FFFFFF;
+    color: var(--black);
+    background-color: var(--white);
 }
 
 .login_input,
@@ -29,12 +29,11 @@
     background: none;
     cursor: pointer;
     font-size: 24px;
-    color: #808185;
+    color: var(--gray);
 }
 
 
 .login_password input::placeholder {
-    /* transform: translateY(7px); */
     font-size: 12px;
 }
 .login_password input {
@@ -50,7 +49,7 @@
 }
 
 label {
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 16px;
     font-weight: 400;
     text-align: left;
@@ -68,22 +67,22 @@ input {
     padding: 12px;
     font-size: 14px;
     line-height: 16.41px;
-    background-color: #F8F8F8;
+    background-color: var(--gray-light);
 }
 
 input:hover {
-    border: 1px solid #FFFFFF;
-    outline: 1px solid #512689;
+    border: 1px solid var(--white);
+    outline: 1px solid var(--violet);
 }
 
 input:active {
-    border: 1px solid #512689;
-    outline: 1px solid #512689;
+    border: 1px solid var(--violet);
+    outline: 1px solid var(--violet);
 }
 
 input:focus {
-    outline: 1px solid #512689;
-    border: 1px solid #512689;
+    outline: 1px solid var(--violet);
+    border: 1px solid var(--violet);
 }
 
 .btn {
@@ -91,8 +90,8 @@ input:focus {
     height: 48px;
     cursor: pointer;
     border-radius: 8px;
-    background-color: #512689;
-    color: #FFFFFF;
+    background-color: var(--violet);
+    color: var(--white);
     font-size: 16px;
     font-weight: 400;
     line-height: 21.79px;
@@ -100,11 +99,11 @@ input:focus {
     margin-top: 8px;
 }
 .error {
-    border: 1px solid #FF6161;
+    border: 1px solid var(--error);
 }
 
 .error_message {
-    color: #FF6161;
+    color: var(--error);
     font-size: 10px;
     margin-top: -10px;
     text-align: left;

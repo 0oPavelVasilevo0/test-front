@@ -2,24 +2,24 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0px 1px 3.98px 0px #33333326;
+    box-shadow: var(--shadow);
     height: 254px;
     align-items: center;
-    border: 1px solid #FFFFFF;
+    border: 1px solid var(--white);
     border-radius: 10px;
     gap: 16px;
 }
 .card:hover {
-    border: 1px solid #000000;
+    border: 1px solid var(--black);
 }
 
 .name {
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 20px;
     font-weight: 400;
     line-height: 23.44px;
     text-align: center;
-    color: #000000;
+    color: var(--black);
 }
 
 .card-like {
@@ -35,6 +35,6 @@
     border-radius: 4px;
     align-content: center;
     font-size: 14px;
-    background-color: #F8F8F8;
+    background-color: var(--gray-light);
     cursor: pointer;
 }

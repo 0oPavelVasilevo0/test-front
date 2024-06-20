@@ -10,7 +10,7 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    max-width: 960px;
+    max-width: 955px;
     width: calc(100% - 70px);
     grid-template-columns: repeat(auto-fit, minmax(305px, 305px));
     gap: 20px;
@@ -24,12 +24,13 @@
     height: 40px;
     cursor: pointer;
     margin-bottom: 60px;
-    border: 1px solid #151317;
+    border: 1px solid var(--black);
     border-radius: 8px;
     background-color: inherit;
-    color: #151317;
+    color: var(--black);
     font-size: 16px;
     font-weight: 400;
+    font-family: 'Roboto';
 }
 
 .error-load {
@@ -37,4 +38,10 @@
     justify-content: center;
     align-items: center;
     height: calc(100vh - 397px);
+}
+
+@media (max-width: 400px) {
+    .user-list {
+            width: 100%;
+    }
 }
