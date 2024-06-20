@@ -1,26 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-interface User {
-    id: number;
-    email: string;
-    first_name: string;
-    last_name: string;
-    avatar: string;
-}
-
 export interface AuthState {
     token: string | null;
     loading: boolean;
     error: string | null;
-    currentUser: User | null;
 }
 
 const initialState: AuthState = {
-    token: localStorage.getItem('token'), // Загружаем токен из localStorage при инициализации
+    token: localStorage.getItem('token'),
     loading: false,
     error: null,
-    currentUser: null,
 };
 
 export const login = createAsyncThunk(
@@ -76,11 +66,8 @@ const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.token = null;
-            state.currentUser = null;//*
             localStorage.removeItem('token');
-        },
-        setCurrentUser: (state, action) => {
-            state.currentUser = action.payload;
+            localStorage.removeItem('likedUsers');//ls like
         },
     },
     extraReducers: (builder) => {
@@ -98,9 +85,6 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload as string;
             })
-            .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-                state.currentUser = action.payload;
-            })
             .addCase(register.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -117,6 +101,8 @@ const authSlice = createSlice({
     },
 });
 
-export const { logout, setCurrentUser } = authSlice.actions;
+export const { logout, 
+    // setCurrentUser 
+} = authSlice.actions;
 
 export default authSlice.reducer;

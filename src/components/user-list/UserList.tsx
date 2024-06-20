@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { User, fetchUsers, resetUsers } from '../../utils/usersSlice';
 import UserCard from '../user-card/UserCard';
+import { GoChevronRight } from "react-icons/go"
 import './user-list.css';
 
 const UserList: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
-    const { users, loading, error, totalPages } = useSelector((state: RootState) => state.users);
+    const { users, loading, error, totalPages, likes } = useSelector((state: RootState) => state.users);
     const token = useSelector((state: RootState) => state.auth.token);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -15,6 +16,7 @@ const UserList: React.FC = () => {
         dispatch(resetUsers());
         if (token) {
             dispatch(fetchUsers({ page: currentPage, token }));
+
         }
     }, [dispatch, currentPage, token]);
 
@@ -22,37 +24,47 @@ const UserList: React.FC = () => {
         setCurrentPage((prevPage) => prevPage + 1);
     };
 
-    if (loading && users.length === 0) {
-        return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 266px)' }}>Загрузка...</div>;
-    }
+    const handleResetPage = () => {
+        setCurrentPage(1);
+        dispatch(resetUsers());
+    };
+
+    const load = (
+        <div className='error-load'>Загрузка...</div>
+    )
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div className='error-load' style={{ color: 'red' }}>Error: {error}</div>;
     }
 
     return (
         <div className='list-container'>
-            <div className='user-list'>
-                {users.map((user: User) => (
-                    <UserCard key={user.id} user={user} />
-                ))}
-            </div>
-            { currentPage < totalPages ? (
-                    <button
-                        className='list-btn'
-                        onClick={handleLoadMore}
-                        disabled={loading}
-                    >
-                        {loading ? 'Загрузка...' : 'показать еще'}
-                    </button>
-                ) : (
-                    <button
-                        className='list-btn'
-                        onClick={() => setCurrentPage(1)}
-                        disabled={loading}>
-                        {loading ? 'Загрузка...' : 'назад'}
-                    </button>
-                )
+            {(loading && users.length === 0) ? load :
+                (<div className='user-list'>
+                    {users.map((user: User) => (
+                        <UserCard key={user.id} user={user} liked={!!likes[user.id]} />
+                    ))}
+                </div>)}
+            {currentPage < totalPages ? (
+                <button
+                    className='list-btn'
+                    onClick={handleLoadMore}
+                    disabled={loading}
+                >
+                    {loading ? 'Загрузка...' :
+                        <>
+                            <span>показать еще</span><GoChevronRight fontSize={'22px'} />
+                        </>
+                    }
+                </button>
+            ) : (
+                <button
+                    className='list-btn'
+                    onClick={handleResetPage}
+                    disabled={loading}>
+                    {loading ? 'загрузка...' : 'назад'}
+                </button>
+            )
             }
         </div>
     );

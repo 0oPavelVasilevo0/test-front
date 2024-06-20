@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
-import { User, fetchUsers, setCurrentUser } from '../../utils/usersSlice';
-import LogoutButton from './../logout-button/LogoutButton';
-import { FaAngleLeft } from "react-icons/fa6";
+import { User, fetchUsers, resetAvatar, setCurrentUser, updateAvatar } from '../../utils/usersSlice';
 import { AiOutlineMail } from "react-icons/ai";
 import './user-details.css'
 
@@ -18,6 +16,10 @@ const UserDetail: React.FC = () => {
     );
     const token = useSelector((state: RootState) => state.auth.token);
 
+    const [newAvatar, setNewAvatar] = useState<string | null>(null);
+    const [editor, setEditor] = useState(1);
+    const [loadError, setLoadError] = useState<string | null>(null);
+
     useEffect(() => {
         if (token) {
             dispatch(fetchUsers({ page: 1, token }));
@@ -30,41 +32,98 @@ const UserDetail: React.FC = () => {
         }
     }, [token, user, dispatch, navigate]);
 
+    const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            if (file.size > 120 * 1024) { // 120KB = 120 * 1024 bytes
+                setLoadError('Не более 120кб!');
+                setEditor(1);
+                return;
+            } else {
+                setLoadError(null);
+            }
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNewAvatar(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleSaveAvatar = () => {
+        if (user && newAvatar) {
+            dispatch(updateAvatar({ userId: user.id, newAvatar }));
+            setNewAvatar(null);
+            setEditor(1);
+        }
+    };
+
+    // const handleCancelAvatar = () => {
+    //     setNewAvatar(null);
+    //     setEditor(1);
+    // }
+
+    const handleResetAvatar = () => {
+        if (user) {
+            dispatch(resetAvatar(user.id));
+            setNewAvatar(null);
+            setEditor(1);
+        }
+    };
+
     if (!user) {
-        return <div>User not found</div>;
+        return <div className='user-error'>User not found</div>;
     }
 
     return (
         <div className='user-details'>
-            <div className='details-nav'>
-                <div className='details-nav-btn'>
-                    <Link to={"/"}>
-                        <button className='nav-btn'>
-                            <span className='btn-icon'><FaAngleLeft /></span>
-                            <span className='btn-not-text'>назад</span>
-                        </button>
-                    </Link>
-                    <LogoutButton />
-                </div>
+            <header className='details-header'>
                 <div className='details-user'>
                     <div className='user-info'>
-                        <img
-                            style={{ borderRadius: '50%' }}
-                            src={user.avatar}
-                            height={'187px'}
-                            width={'187px'}
-                            alt={user.first_name}
-                        />
+                        <div className='user-avatar'>
+                            <img
+                                style={{ borderRadius: '50%' }}
+                                src={newAvatar || user.avatar}
+                                height={'187px'}
+                                width={'187px'}
+                                alt={user.first_name}
+                            />
+                            <div className='editor'>
+                                {editor === 1 ?
+                                    <button className='btn-editor' onClick={() => {setEditor(2); setLoadError(null)}}>
+                                        редакт.{loadError && <div className='editor-error'>{loadError}</div>}
+                                    </button>
+                                    :
+                                    <>{!newAvatar && <button className='btn-editor' onClick={() => setEditor(1)}>закрыть</button>}</>
+                                }
+                                {editor === 2 &&
+                                    <>
+                                        {!newAvatar &&
+                                            <label className="editor-file">
+                                                загрузить
+                                                {/* {loadError ? <div className='editor-file editor-error'>{loadError}</div> :
+                                               'выберите файл'} */}
+                                                <input type="file" onChange={handleAvatarChange} />
+                                            </label>}
+                                        {newAvatar &&
+                                            <>
+                                                <button className='btn-editor' onClick={handleSaveAvatar}>сохранить</button>
+                                                {/* <button className='btn-editor' onClick={handleCancelAvatar}>cancel</button> */}
+                                            </>
+                                        }
+                                        <button className='btn-editor re' onClick={handleResetAvatar}>сброс</button>
+                                    </>
+                                }
+                            </div>
+                            {/* {loadError && <div className='editor-error'>{loadError}</div>} */}
+                        </div>
                         <h1 className='user-name'>
                             {user.first_name} {user.last_name}
                         </h1>
                     </div>
                 </div>
-
-            </div>
+            </header>
             <div className='description-container'>
-                {/* <img src={user.avatar} alt={user.first_name} />
-                <h2>{user.first_name} {user.last_name}</h2> */}
                 <div className='user-description'>
                     <p>Клиенты видят в нем эксперта по вопросам разработки комплексных решений финансовых продуктов, включая такие аспекты, как организационная структура, процессы, аналитика и ИТ-компоненты. Он помогает клиентам лучше понимать структуру рисков их бизнеса, улучшать процессы за счет применения новейших технологий и увеличивать продажи, используя самые современные аналитические инструменты.</p>
                     <p>В работе с клиентами недостаточно просто решить конкретную проблему или помочь справиться с трудностями. Не менее важно уделять внимание обмену знаниями: "Один из самых позитивных моментов — это осознание того, что ты помог клиенту перейти на совершенно новый уровень компетентности, уверенность в том, что после окончания проекта у клиента есть все необходимое, чтобы дальше развиваться самостоятельно".</p>
@@ -74,14 +133,9 @@ const UserDetail: React.FC = () => {
                     <AiOutlineMail style={{ fontSize: '24px', color: '#512689' }} />
                     <p>{user.email}</p>
                 </div>
-
             </div>
         </div>
     );
 };
 
 export default UserDetail;
-
-
-
-
