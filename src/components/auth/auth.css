@@ -4,10 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* gap: 16px; */
     color: rgb(47, 43, 43);
     background-color: #FFFFFF;
-
 }
 
 .login_input,
@@ -36,8 +34,8 @@
 
 
 .login_password input::placeholder {
-    transform: translateY(7px);
-    font-size: 20px;
+    /* transform: translateY(7px); */
+    font-size: 12px;
 }
 .login_password input {
     padding: 12px 40px 12px 12px;

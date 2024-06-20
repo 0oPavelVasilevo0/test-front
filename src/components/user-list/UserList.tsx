@@ -6,7 +6,7 @@ import UserCard from '../user-card/UserCard';
 import { GoChevronRight } from "react-icons/go"
 import './user-list.css';
 
-const UserList: React.FC = () => {
+const UserList = () => {
     const dispatch: AppDispatch = useDispatch();
     const { users, loading, error, totalPages, likes } = useSelector((state: RootState) => state.users);
     const token = useSelector((state: RootState) => state.auth.token);

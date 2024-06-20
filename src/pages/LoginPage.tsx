@@ -1,5 +1,4 @@
-import React from 'react';
-import Auth from '../components/auth/Auth';
+import Auth from '../components/auth/authorization/Auth';
 import { Link } from 'react-router-dom';
 
 const LoginPage = () => {

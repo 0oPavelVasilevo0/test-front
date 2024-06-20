@@ -14,16 +14,16 @@
  .btn-icon {
     display: none;
  }
-@media (max-width: 600px) {
+@media (max-width: 1200px) {
     .logout-btn {
         border: none;
-        padding: 8px;
+        padding: 6px;
     }
     .btn-not-text {
         display: none;
     }
     .btn-icon {
         display: flex;
-        font-size: 22px;
+        font-size: 26px;
     }
 }

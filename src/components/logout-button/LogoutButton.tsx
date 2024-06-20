@@ -1,13 +1,11 @@
-// components/LogoutButton.tsx
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../utils/authSlice';
 import { AppDispatch } from '../../store/store';
 import { IoMdExit } from "react-icons/io";
-
 import './logout-btn.css'
 
-const LogoutButton: React.FC = () => {
+const LogoutButton = () => {
     const dispatch: AppDispatch = useDispatch();
 
     const handleLogout = () => {
@@ -19,7 +17,7 @@ const LogoutButton: React.FC = () => {
         onClick={handleLogout}
     >
         <span className='btn-icon'><IoMdExit /></span>
-       <span className='btn-not-text'>Выход</span>
+        <span className='btn-not-text'>Выход</span>
     </button>;
 };
 

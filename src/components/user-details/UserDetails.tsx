@@ -6,7 +6,7 @@ import { User, fetchUsers, resetAvatar, setCurrentUser, updateAvatar } from '../
 import { AiOutlineMail } from "react-icons/ai";
 import './user-details.css'
 
-const UserDetail: React.FC = () => {
+const UserDetail = () => {
     const { id } = useParams<{ id: string }>();
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const UserDetail: React.FC = () => {
     const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
-            if (file.size > 120 * 1024) { // 120KB = 120 * 1024 bytes
+            if (file.size > 120 * 1024) { // 120KB
                 setLoadError('Не более 120кб!');
                 setEditor(1);
                 return;
@@ -57,11 +57,6 @@ const UserDetail: React.FC = () => {
             setEditor(1);
         }
     };
-
-    // const handleCancelAvatar = () => {
-    //     setNewAvatar(null);
-    //     setEditor(1);
-    // }
 
     const handleResetAvatar = () => {
         if (user) {
@@ -90,7 +85,7 @@ const UserDetail: React.FC = () => {
                             />
                             <div className='editor'>
                                 {editor === 1 ?
-                                    <button className='btn-editor' onClick={() => {setEditor(2); setLoadError(null)}}>
+                                    <button className='btn-editor' onClick={() => { setEditor(2); setLoadError(null) }}>
                                         редакт.{loadError && <div className='editor-error'>{loadError}</div>}
                                     </button>
                                     :
@@ -101,21 +96,17 @@ const UserDetail: React.FC = () => {
                                         {!newAvatar &&
                                             <label className="editor-file">
                                                 загрузить
-                                                {/* {loadError ? <div className='editor-file editor-error'>{loadError}</div> :
-                                               'выберите файл'} */}
                                                 <input type="file" onChange={handleAvatarChange} />
                                             </label>}
                                         {newAvatar &&
                                             <>
                                                 <button className='btn-editor' onClick={handleSaveAvatar}>сохранить</button>
-                                                {/* <button className='btn-editor' onClick={handleCancelAvatar}>cancel</button> */}
                                             </>
                                         }
                                         <button className='btn-editor re' onClick={handleResetAvatar}>сброс</button>
                                     </>
                                 }
                             </div>
-                            {/* {loadError && <div className='editor-error'>{loadError}</div>} */}
                         </div>
                         <h1 className='user-name'>
                             {user.first_name} {user.last_name}

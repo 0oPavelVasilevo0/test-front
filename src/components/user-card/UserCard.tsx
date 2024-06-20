@@ -11,7 +11,7 @@ interface UserCardProps {
     liked: boolean; // Add liked
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user, liked }) => {
+const UserCard = ({ user, liked }: UserCardProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const handleViewDetails = () => {
