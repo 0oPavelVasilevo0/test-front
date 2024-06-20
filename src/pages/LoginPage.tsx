@@ -7,7 +7,7 @@ const LoginPage = () => {
             <div className='login-card'>
                 <h1 className='login-title'>Авторизация</h1>
                 <Auth />
-                <p style={{ marginTop: '10px' }}>Нет аккаунта? <Link to={'/register'}>Зарегистрироваться</Link></p>
+                <p style={{ marginTop: '10px' }}>Нет аккаунта? <Link style={{color: '#512689'}} to={'/register'}>Зарегистрироваться</Link></p>
             </div>
             <div className='test'>
                 <p>Test</p>

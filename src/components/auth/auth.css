@@ -32,7 +32,9 @@
     color: var(--gray);
 }
 
-
+.login_password input[type="password"] {
+    font-size: 20px;
+}
 .login_password input::placeholder {
     font-size: 12px;
 }
@@ -68,21 +70,26 @@ input {
     font-size: 14px;
     line-height: 16.41px;
     background-color: var(--gray-light);
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 input:hover {
     border: 1px solid var(--white);
     outline: 1px solid var(--violet);
+    box-shadow: none;
 }
 
 input:active {
     border: 1px solid var(--violet);
     outline: 1px solid var(--violet);
+    box-shadow: none;
 }
 
 input:focus {
     outline: 1px solid var(--violet);
     border: 1px solid var(--violet);
+    box-shadow: none;
 }
 
 .btn {

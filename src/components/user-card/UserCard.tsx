@@ -45,7 +45,7 @@ const UserCard = ({ user, liked }: UserCardProps): JSX.Element => {
                         {liked ? (
                             <GoHeartFill style={{ color: '#512689' }} />
                         ) : (
-                            <GoHeart />
+                            <GoHeart style={{color: '#151317'}} />
                         )}
                     </button>
                 </div>
