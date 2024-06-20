@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import ScrollToTop from './util-scroll/scrollToTop';
 import Navbar from './components/navbar/Navbar';
 import './App.css';
+import TopBtn from './components/top-btn/TopBtn';
 
 function App() {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -22,6 +23,7 @@ function App() {
           <Route path="/user/:id" element={<UserPage />} />
           <Route path="/" element={token ? <HomePage /> : <Navigate to="/login" />} />
         </Routes>
+        <TopBtn />
       </Router>
     </div>
   );
